@@ -10,10 +10,10 @@ export class Book {
   user: User;
 
   @Column()
-  lendStatus: number= -1; //-1 not borrowed, 0 borrowed, 1 returned
+  lendStatus: number; //-1 not borrowed, 0 borrowed, 1 returned
 
   @Column()
-  score: number = -1;
+  userScore: number = -1;
 
   @Column()
   name: string;
