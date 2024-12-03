@@ -1,0 +1,41 @@
+@use "../../index.scss" as *;
+
+.main-page-container {
+  width: 100vw;
+  height: 100vh;
+  background: url("/bg1.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  min-height: $section-height;
+}
+
+.first-section-container {
+  background-position: center;
+  background-size: cover;
+  height: 70vh;
+  justify-content: center;
+  align-items: center;
+  background: url("/firstSectionImage.png");
+  background-repeat: no-repeat;
+}
+
+.button-side {
+  display: flex;
+  margin-top: -13vh;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .button-side {
+    margin-top: -100px;
+  }
+  .main-page-container {
+    padding-top: -15vh;
+  }
+}
+@media (min-width: 768px) {
+  .main-page-container {
+    padding-top: 16vh;
+  }
+}
