@@ -6,8 +6,8 @@ export class Book {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ManyToOne(() => User, (user) => user.books)
-  user: User;
+  @ManyToOne(() => User, (user) => user.books, { nullable: true })
+  user: User | null;
 
   @Column()
   lendStatus: number; //-1 not borrowed, 0 borrowed, 1 returned
