@@ -2,6 +2,7 @@ import { UserController } from "./controller/UserController";
 import { BookController } from "./controller/BookController";
 
 export const Routes = [
+  //get operations
   {
     method: "get",
     route: "/users",
@@ -26,16 +27,17 @@ export const Routes = [
     controller: BookController,
     action: "getBook",
   },
+  //post operations
   {
     method: "post",
     route: "/users/:id/borrow/:bookId",
-    controller: UserController,
+    controller: BookController,
     action: "borrowBook",
   },
   {
     method: "post",
     route: "/users/:id/return/:bookId",
-    controller: UserController,
+    controller: BookController,
     action: "returnBook",
   },
 ];
