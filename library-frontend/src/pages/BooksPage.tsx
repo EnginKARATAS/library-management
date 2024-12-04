@@ -2,9 +2,7 @@ import { Button } from "@mui/material";
 import { Grid2 as Grid } from "@mui/material";
 import "../styles/components/booksPage.scss";
 //import { useNavigate } from "react-router-dom";
-import {
-  useDialogs,
-} from "@toolpad/core/useDialogs";
+import { useDialogs } from "@toolpad/core/useDialogs";
 import BasePopup from "../components/popup/BasePopup";
 import BookDetail from "../components/popup/BookDetail";
 import { AppDispatch, RootState } from "../store";
@@ -19,14 +17,14 @@ export default function BooksPage() {
 
   useEffect(() => {
     dispatch(fetchBooks());
-  }, [dispatch]);  
+  }, [dispatch]);
 
   const onBookDetailsClick = async (id: number) => {
     const bookId = await dialogs.open(BasePopup, {
-      component: <BookDetail />,
+      component: <BookDetail bookId={id} />,
       title: "Book Details",
     });
-    
+
     if (bookId) {
       dialogs.alert(`The book was sended to user with ID: ${bookId}`, {
         title: "Success",
@@ -51,7 +49,7 @@ export default function BooksPage() {
           <Grid>Book Name</Grid>
           <Grid>Book Detail</Grid>
         </Grid>
-        {books.map((book, index) => (
+        {books?.map((book, index) => (
           <Grid
             container
             key={book.id}
