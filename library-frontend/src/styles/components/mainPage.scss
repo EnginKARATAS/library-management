@@ -1,6 +1,6 @@
 @use "../../index.scss" as *;
 
-.main-page-container {
+.main-container {
   width: 100vw;
   height: 100vh;
   background: url("/bg1.png");
@@ -30,12 +30,12 @@
   .button-side {
     margin-top: -100px;
   }
-  .main-page-container {
+  .main-container {
     padding-top: -15vh;
   }
 }
 @media (min-width: 768px) {
-  .main-page-container {
+  .main-container {
     padding-top: 16vh;
   }
 }
