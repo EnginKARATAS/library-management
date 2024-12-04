@@ -6,12 +6,23 @@ import { useDialogs } from "@toolpad/core/useDialogs";
 import BasePopup from "../components/popup/BasePopup";
 import BookDetail from "../components/popup/BookDetail";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { fetchUsers } from "../store/slices/userSlice";
+import { RootState } from "../store";
+import { AppDispatch } from "../store";
+import { useEffect } from "react";
+
 export default function UsersPage() {
   const navigate = useNavigate();
-  const users = [
-    { id: 1, name: "Engin Karataş" },
-    { id: 2, name: "Test User" },
-  ];
+  const dispatch = useDispatch<AppDispatch>();
+  const users = useSelector((state: RootState) => state.user.users);
+  const loading = useSelector((state: RootState) => state.user.loading);
+  const error = useSelector((state: RootState) => state.user.error);
+
+  useEffect(() => {
+    dispatch(fetchUsers());
+  }, [dispatch]);  
 
   const dialogs = useDialogs();
 
@@ -62,7 +73,7 @@ export default function UsersPage() {
                   navigate(`/users/${user.id}`);
                 }}
               >
-                Go to Profile 
+                Go to Profile
               </Button>
             </Grid>
           </Grid>
