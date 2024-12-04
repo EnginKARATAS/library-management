@@ -28,6 +28,7 @@ export class UserController {
       .select([
         "user.id",
         "user.name",
+        "book.id",
         "book.name",
         "book.score",
         "book.lendStatus",
@@ -44,10 +45,10 @@ export class UserController {
       books: {
         past: user.books
           .filter((book) => book.lendStatus == 1)
-          .map((book) => {return {name: book.name, score: book.score}}),
+          .map((book) => {return {id: book.id, name: book.name, score: book.score}}),
         present: user.books
           .filter((book) => book.lendStatus == 0)
-          .map((book) => {return {name: book.name, score: book.score}}),
+          .map((book) => {return {id: book.id, name: book.name, score: book.score}}),
       },
     };
     return userBook;
