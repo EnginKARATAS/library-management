@@ -15,18 +15,24 @@ export class BookController {
   async getBook(request: Request, response: Response, next: NextFunction) {
     const id = parseInt(request.params.id);
 
+    if (isNaN(id)) {
+      response.status(400).send("Invalid book ID");
+      return;
+    }
+
     const book = await this.bookRepository.findOne({
-      select: { id: true, name: true, userScore: true },
       where: { id },
     });
 
     if (!book) {
-      return "unregistered book";
+      response.status(404).send({ message: "Unregistered book"});
+      return;
     }
+
     const bookResponseModel = {
       id: book.id,
       name: book.name,
-      score: book.userScore === "-1" ? Number(book.userScore) : book.userScore, //to comply given api response
+      score: book.score === "-1" ? Number(book.score) : book.score,
     };
     return bookResponseModel;
   }
