@@ -22,7 +22,7 @@ interface SnackbarState {
 
 interface UserState {
   users: User[] | null;
-  currentUser: User | null;
+  currentUser: UserBook | null;
   loading: boolean;
   error: string | null;
   snackbar: SnackbarState;
@@ -42,7 +42,6 @@ const initialState: UserState = {
 
 export const fetchUsers = createAsyncThunk("users/fetchUsers", async () => {
   const response = await axios.get("http://localhost:3000/users");
-  console.log(response.data);
   return response.data;
 });
 
@@ -104,7 +103,7 @@ const userSlice = createSlice({
       })
       .addCase(
         fetchUserDetails.fulfilled,
-        (state, action: PayloadAction<User>) => {
+        (state, action: PayloadAction<UserBook>) => {
           state.loading = false;
           state.currentUser = action.payload;
         }
