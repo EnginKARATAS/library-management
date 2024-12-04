@@ -1,22 +1,38 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
+import axios from 'axios';
+
+type UserBook = {
+  id: number;
+  name: string;
+  books?: {
+    past: any[];
+    present: any[];
+  };
+}
+
+type User = Omit<UserBook, 'books'>;
 
 interface UserState {
-  id: number | null;
-  name: string | null;
+  users: User[] | null;
+  currentUser: User | null;
+  loading: boolean;
+  error: string | null;
 }
 
 const initialState: UserState = {
-  id: null,
-  name: null,
+  users: [],
+  currentUser: null,
+  loading: false,
+  error: null,
 };
+
 
 const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
- 
   },
 });
 
-//export const {  } = userSlice.actions;
+//export const {   } = userSlice.actions;
 export default userSlice.reducer;
