@@ -25,7 +25,7 @@ export default function BasePopup({
           onClick={async () => {
             setLoading(true);
             try {
-              onClose("uuid");
+              onClose("id");
             } finally {
               setLoading(false);
             }
