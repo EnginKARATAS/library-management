@@ -7,12 +7,27 @@ import {
 import { DialogProps } from "@toolpad/core";
 import LoadingButton from "@mui/lab/LoadingButton";
 import * as React from "react";
+import { fetchUsers } from "../../store/slices/userSlice";
+import { fetchBookDetails } from "../../store/slices/bookSlice";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../store";
 
 export default function BasePopup({
   open,
   onClose,
   payload,
-}: DialogProps<{ component: React.ReactNode; title: string }, string | null>) {
+}: DialogProps<
+  { component: React.ReactNode; title: string; bookId: number },
+  string | null
+>) {
+  const dispatch = useDispatch<AppDispatch>();
+
+  useEffect(() => {
+    dispatch(fetchBookDetails(payload.bookId));
+    dispatch(fetchUsers());
+  }, [dispatch, payload.bookId]);
+
   const [loading, setLoading] = React.useState(false);
 
   return (

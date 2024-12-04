@@ -3,42 +3,55 @@ import { Stack } from "@mui/material";
 import { TextField } from "@mui/material";
 
 import { MenuItem } from "@mui/material";
-import { useState } from "react";
-export default function BookDetail() {
-  const [bookDetails, setBookDetails] = useState({
-    bookName: "Book Name",
-    author: "Author",
-    bookYear: "Book Year",
-    publisher: "Publisher",
-    userScore: "User Score",
-    userData: [
-      {
-        id: "12",
-        name: "Engin Karataş",
-      },
-      {
-        id: "21",
-        name: "Test User",
-      },
-    ],
-  });
-  const [userId, setUserId] = useState<number | null>(null);
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../../store";
+import { useEffect, useState } from "react";
+import { borrowBookToUser, fetchUsers } from "../../store/slices/userSlice";
+import { fetchBookDetails } from "../../store/slices/bookSlice";
+import { showSnackbar } from "../../store/slices/userSlice";
 
+export default function BookDetail({ bookId }: { bookId: number }) {
+  const bookDetails = useSelector((state: RootState) => state.book.oneBook);
+  const users = useSelector((state: RootState) => state.user.users);
+  const dispatch = useDispatch<AppDispatch>();
+  const [selectedUserId, setSelectedUserId] = useState(0);
+
+  useEffect(() => {
+    dispatch(fetchUsers());
+  }, [dispatch]);
+
+  useEffect(() => {
+    console.log("Current bookId:", bookId);
+    if (bookId >= 0) {
+      dispatch(fetchBookDetails(bookId));
+    }
+  }, [dispatch, bookId]);
+
+  const setUserId = (userId: number) => {
+    setSelectedUserId(userId);
+    dispatch(borrowBookToUser({ bookId, userId })).then((result) => {
+      dispatch(
+        showSnackbar({
+          message:
+            "Book borrowed successfully, new possesser: " + selectedUserId,
+          severity: "success",
+        })
+      );
+    });
+  };
   return (
-    <Stack spacing={2} padding={1} >
+    <Stack spacing={2} padding={1}>
       <TextField
-        label="Book Name"
-        placeholder="Book Name"
+        placeholder={bookDetails?.name}
         slotProps={{
           input: {
             readOnly: true,
           },
         }}
         id="filled-disabled"
-        value={bookDetails.bookName}
+        value={bookDetails?.name}
       />
       <TextField
-        label="Author"
         placeholder="Author"
         slotProps={{
           input: {
@@ -46,10 +59,9 @@ export default function BookDetail() {
           },
         }}
         id="filled-disabled2"
-        value={bookDetails.author}
+        value={bookDetails?.author}
       />
       <TextField
-        label="Book Year"
         placeholder="Book Year"
         slotProps={{
           input: {
@@ -57,10 +69,9 @@ export default function BookDetail() {
           },
         }}
         id="filled-disabled3"
-        value={bookDetails.bookYear}
+        value={bookDetails?.year}
       />
       <TextField
-        label="Publisher"
         placeholder="Publisher"
         slotProps={{
           input: {
@@ -68,31 +79,31 @@ export default function BookDetail() {
           },
         }}
         id="filled-disabled4"
-        value={bookDetails.publisher}
+        value={bookDetails?.publisher}
       />
-      <TextField
-        label="User Score"
-        placeholder="User Score"
-        slotProps={{
-          input: {
-            readOnly: true,
-          },
-        }}
-        id="filled-disabled5"
-        value={bookDetails.userScore}
-      />
+      {bookDetails?.score && bookDetails?.score >= 0 && (
+        <TextField
+          placeholder={bookDetails?.score.toString()}
+          slotProps={{
+            input: {
+              readOnly: true,
+            },
+          }}
+          id="filled-disabled5"
+          value={bookDetails?.score}
+        />
+      )}
 
       <TextField
-        label="Current Owned By"
         select
-        defaultValue={bookDetails.userData[0].id}
-        placeholder="Current Owned By"
+        defaultValue={1}
+        placeholder="Currently Owned By"
         onChange={(event) => {
           console.log("changing", event.target.value);
           setUserId(parseInt(event.target.value));
         }}
       >
-        {bookDetails.userData.map((user) => {
+        {users?.map((user) => {
           return (
             <MenuItem key={user.id} value={user.id}>
               {user.name}
