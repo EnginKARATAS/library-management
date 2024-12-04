@@ -7,16 +7,19 @@ import {
 } from "@toolpad/core/useDialogs";
 import BasePopup from "../components/popup/BasePopup";
 import BookDetail from "../components/popup/BookDetail";
+import { AppDispatch, RootState } from "../store";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { fetchBooks } from "../store/slices/bookSlice";
 export default function BooksPage() {
   //const navigate = useNavigate();
-  const books = [
-    { id: 1, name: "The Great Gatsby" },
-    { id: 2, name: "To Kill a Mockingbird" },
-    { id: 3, name: "1984" },
-    { id: 4, name: "Pride and Prejudice" },
-  ];
-
+  const books = useSelector((state: RootState) => state.book.books);
+  const dispatch = useDispatch<AppDispatch>();
   const dialogs = useDialogs();
+
+  useEffect(() => {
+    dispatch(fetchBooks());
+  }, [dispatch]);  
 
   const onBookDetailsClick = async (id: number) => {
     const bookId = await dialogs.open(BasePopup, {
