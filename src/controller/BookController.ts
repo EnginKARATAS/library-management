@@ -6,6 +6,7 @@ export class BookController {
   private bookRepository = AppDataSource.getRepository(Book);
 
   async getAllBooks(request: Request, response: Response, next: NextFunction) {
+    //TODO: get all non borrowed books
     return this.bookRepository.find({
       select: { id: true, name: true },
     });
@@ -63,6 +64,7 @@ export class BookController {
   }
 
   async returnBook(request: Request, response: Response, next: NextFunction) {
+    //TODO: add return book review by user post {score: number}
     try {
       const userId = parseInt(request.params.id);
       const bookId = parseInt(request.params.bookId);
