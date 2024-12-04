@@ -15,7 +15,7 @@ export default function BookDetail({ bookId }: { bookId: number }) {
   const users = useSelector((state: RootState) => state.user.users);
   const dispatch = useDispatch<AppDispatch>();
   const [selectedUserId, setSelectedUserId] = useState(0);
-
+  const [username,setUsername] = useState("");
   useEffect(() => {
     dispatch(fetchUsers());
   }, [dispatch]);
@@ -27,17 +27,22 @@ export default function BookDetail({ bookId }: { bookId: number }) {
     }
   }, [dispatch, bookId]);
 
-  const setUserId = (userId: number) => {
-    setSelectedUserId(userId);
-    dispatch(borrowBookToUser({ bookId, userId })).then((result) => {
-      dispatch(
-        showSnackbar({
-          message:
-            "Book borrowed successfully, new possesser: " + selectedUserId,
-          severity: "success",
-        })
-      );
-    });
+ 
+
+  const assignBookToUser = (userId: number) => {
+    const selectedUser = users?.find(user => user.id === userId);
+    if (selectedUser) {
+      setUsername(selectedUser.name);
+      setSelectedUserId(userId);
+      dispatch(borrowBookToUser({ bookId, userId })).then((result) => {
+        dispatch(
+          showSnackbar({
+            message: "Book borrowed successfully, new possesser: " + selectedUser.name,
+            severity: "success",
+          })
+        );
+      });
+    }
   };
   return (
     <Stack spacing={2} padding={1}>
@@ -96,16 +101,15 @@ export default function BookDetail({ bookId }: { bookId: number }) {
 
       <TextField
         select
-        defaultValue={1}
-        placeholder="Currently Owned By"
+        defaultValue={0}
+        label="Assign this book to a user"
         onChange={(event) => {
-          console.log("changing", event.target.value);
-          setUserId(parseInt(event.target.value));
+          assignBookToUser(parseInt(event.target.value));
         }}
       >
         {users?.map((user) => {
           return (
-            <MenuItem key={user.id} value={user.id}>
+            <MenuItem key={user.id} onClick={() => {setUsername(user.name)}} value={user.id}>
               {user.name}
             </MenuItem>
           );
