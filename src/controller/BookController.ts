@@ -6,9 +6,9 @@ export class BookController {
   private bookRepository = AppDataSource.getRepository(Book);
 
   async getAllBooks(request: Request, response: Response, next: NextFunction) {
-    //TODO: get all non borrowed books
     return this.bookRepository.find({
       select: { id: true, name: true },
+      where: { lendStatus: -1 },
     });
   }
 
