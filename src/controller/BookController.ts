@@ -70,10 +70,16 @@ export class BookController {
   }
 
   async returnBook(request: Request, response: Response, next: NextFunction) {
+    const star = request.body;
     //TODO: add return book review by user post {score: number}
     try {
       const userId = parseInt(request.params.id);
       const bookId = parseInt(request.params.bookId);
+
+      if (isNaN(userId) || isNaN(bookId)) {
+        response.status(400).send('Invalid user ID or book ID');
+        return
+      }
 
       const existingBook = await this.bookRepository.findOne({
         where: { id: bookId, user: { id: userId } },
@@ -85,6 +91,7 @@ export class BookController {
       const updated = await this.bookRepository.update(bookId, {
         user: { id: null },
         lendStatus: -1,
+        score: star.score,
       });
 
       await this.bookRepository.save({ ...existingBook, lendStatus: 1 });
