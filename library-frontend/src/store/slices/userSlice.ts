@@ -166,6 +166,9 @@ const userSlice = createSlice({
             (book) => book.id == bookId
           );
           if (bookIndex !== -1) {
+            state.currentUser.books.past.push(
+              state.currentUser.books.present[bookIndex]
+            );
             state.currentUser.books.present.splice(bookIndex, 1);
           }
         }
