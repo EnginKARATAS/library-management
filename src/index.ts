@@ -9,7 +9,7 @@ import { Book } from "./entity/Book";
 AppDataSource.initialize()
   .then(async () => {
     const app = express();
-    const cors = require('cors');
+    const cors = require("cors");
     app.use(cors());
     app.use(bodyParser.json());
 
@@ -52,7 +52,7 @@ AppDataSource.initialize()
         name: "Test User3",
       })
     );
-    
+
     const book1 = AppDataSource.manager.create(Book, {
       author: "Test Author",
       name: "Test Book",
@@ -87,9 +87,9 @@ AppDataSource.initialize()
       author: "Test Author4",
       name: "Test Book4",
       publisher: "Test Publisher4",
-      user: null,
+      user: { id: 1 },
       year: 2023,
-      lendStatus: -1,
+      lendStatus: 0,
       score: "3",
     });
 
@@ -97,9 +97,9 @@ AppDataSource.initialize()
       author: "Test Author5",
       name: "Test Book5",
       publisher: "Test Publisher5",
-      user: null,
+      user: { id: 1 },
       year: 2023,
-      lendStatus: -1,
+      lendStatus: 0,
       score: "4",
     });
 
@@ -107,9 +107,9 @@ AppDataSource.initialize()
       author: "Test Author6",
       name: "Test Book6",
       publisher: "Test Publisher6",
-      user: null,
+      user: { id: 1 },
       year: 2023,
-      lendStatus: -1,
+      lendStatus: 0,
       score: "5",
     });
 

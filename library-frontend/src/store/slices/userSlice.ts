@@ -71,9 +71,18 @@ export const borrowBookToUser = createAsyncThunk(
 
 export const returnBookFromUser = createAsyncThunk(
   "users/returnBookFromUser",
-  async ({ bookId, userId }: { bookId: number; userId: number }) => {
+  async ({
+    bookId,
+    userId,
+    score,
+  }: {
+    bookId: number;
+    userId: number;
+    score: number;
+  }) => {
     const response = await axios.post(
-      `http://localhost:3000/users/${userId}/return/${bookId}`
+      `http://localhost:3000/users/${userId}/return/${bookId}`,
+      { score: score }
     );
     return response;
   }
@@ -152,8 +161,9 @@ const userSlice = createSlice({
       .addCase(returnBookFromUser.fulfilled, (state, action) => {
         if (state.currentUser?.books) {
           const bookId = action.meta.arg.bookId;
+
           const bookIndex = state.currentUser.books.present.findIndex(
-            book => book.id === bookId
+            (book) => book.id == bookId
           );
           if (bookIndex !== -1) {
             state.currentUser.books.present.splice(bookIndex, 1);

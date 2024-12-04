@@ -70,9 +70,8 @@ export class BookController {
   }
 
   async returnBook(request: Request, response: Response, next: NextFunction) {
-    const star = request.body;
-    //TODO: add return book review by user post {score: number}
-    try {
+     try {
+      const score = request.body.score;
       const userId = parseInt(request.params.id);
       const bookId = parseInt(request.params.bookId);
 
@@ -88,13 +87,26 @@ export class BookController {
         response.status(404).send();
         return;
       }
+
+      const newBook = await this.bookRepository.create({
+        author: existingBook.author,
+        name: existingBook.name,
+        publisher: existingBook.publisher,
+        user: { id: userId },
+        year: existingBook.year,
+        lendStatus: 1,
+        score: score,
+      });
+      await this.bookRepository.save(newBook);
+
       const updated = await this.bookRepository.update(bookId, {
         user: { id: null },
         lendStatus: -1,
-        score: star.score,
+        score: score,
       });
 
-      await this.bookRepository.save({ ...existingBook, lendStatus: 1 });
+
+      
 
       if (updated.affected) {
         response.status(204).send();

@@ -5,7 +5,10 @@ import { useParams } from "react-router-dom";
 import { useDialogs } from "@toolpad/core/useDialogs";
 import { BasePopup2 } from "../components/popup/BasePopup";
 import { useEffect } from "react";
-import { fetchUserDetails, returnBookFromUser } from "../store/slices/userSlice";
+import {
+  fetchUserDetails,
+  returnBookFromUser,
+} from "../store/slices/userSlice";
 import { AppDispatch, RootState } from "../store";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -23,9 +26,16 @@ export default function UserDetail() {
 
   const onReturnBookClick = async (bookId: number) => {
     if (id) {
-      await dispatch(returnBookFromUser({ bookId, userId: parseInt(id) }));
       const result = await dialogs.open(BasePopup2);
+
       if (result && parseInt(result) <= 5 && parseInt(result) >= 0) {
+        await dispatch(
+          returnBookFromUser({
+            bookId,
+            userId: parseInt(id),
+            score: parseInt(result || "0"),
+          })
+        );
         await dialogs.alert(
           `Your have successfully returned, and rated the book with ${Number(
             result
