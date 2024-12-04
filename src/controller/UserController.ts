@@ -29,7 +29,7 @@ export class UserController {
         "user.id",
         "user.name",
         "book.name",
-        "book.userScore",
+        "book.score",
         "book.lendStatus",
       ])
       .where("user.id = :id", { id })
@@ -44,10 +44,10 @@ export class UserController {
       books: {
         past: user.books
           .filter((book) => book.lendStatus == 1)
-          .map((book) => {return {name: book.name, userScore: book.userScore}}),
+          .map((book) => {return {name: book.name, score: book.score}}),
         present: user.books
           .filter((book) => book.lendStatus == 0)
-          .map((book) => {return {name: book.name, userScore: book.userScore}}),
+          .map((book) => {return {name: book.name, score: book.score}}),
       },
     };
     return userBook;

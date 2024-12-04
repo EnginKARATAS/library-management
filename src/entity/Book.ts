@@ -13,7 +13,7 @@ export class Book {
   lendStatus: number; //-1 not borrowed, 0 borrowed, 1 returned
 
   @Column()
-  userScore: string;
+  score: string;
 
   @Column()
   name: string;
