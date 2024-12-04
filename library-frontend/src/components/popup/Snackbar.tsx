@@ -13,9 +13,9 @@ export default function Snackbar() {
   return (
     <MUISnackbar
       open={snackbar.open}
-      autoHideDuration={2000}
+      autoHideDuration={3000}
       onClose={handleClose}
-      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+      anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
     >
       <Alert
         onClose={handleClose}
