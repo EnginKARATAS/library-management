@@ -94,7 +94,7 @@ function Header() {
             >
               {pages.map((page, index) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography onClick={() =>{console.log(navigatePages[index])}} sx={{ textAlign: "center" }}>{page}</Typography>
+                  <Typography onClick={() =>{navigate(navigatePages[index])}} sx={{ textAlign: "center" }}>{page}</Typography>
                 </MenuItem>
               ))}
             </Menu>

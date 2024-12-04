@@ -31,7 +31,7 @@ export default function MainPage() {
               alignItems="center"
               direction="column"
             >
-              <Button onClick={()=>onButtonClick("books")} variant="contained" style={{ backgroundColor: "#4a2e6f", color: "white" }}>Book Management</Button>
+              <Button onClick={()=>onButtonClick("books")} variant="contained" style={{ backgroundColor: "#4a2e6f", color: "white" }}>See Available Books!</Button>
             </Grid>
           </Grid>
           <Grid

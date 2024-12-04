@@ -7,6 +7,7 @@ import { Routes, Route } from "react-router-dom";
 import "./App.scss";
 import Header from "./components/layout/Header";
 import UsersPage from "./pages/UsersPage";
+import UserDetail from "./pages/UserDetail";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/books" element={<BooksPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/users" element={<UsersPage />} />
+          <Route path="/users/:id" element={<UserDetail />} />
         </Routes>
       </DialogsProvider>
   );

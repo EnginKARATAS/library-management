@@ -2,13 +2,12 @@ import { Button } from "@mui/material";
 import { Grid2 as Grid } from "@mui/material";
 import "../styles/components/booksPage.scss";
 //import { useNavigate } from "react-router-dom";
-import {
-  useDialogs,
-} from "@toolpad/core/useDialogs";
+import { useDialogs } from "@toolpad/core/useDialogs";
 import BasePopup from "../components/popup/BasePopup";
 import BookDetail from "../components/popup/BookDetail";
+import { useNavigate } from "react-router-dom";
 export default function UsersPage() {
-  //const navigate = useNavigate();
+  const navigate = useNavigate();
   const users = [
     { id: 1, name: "Engin Karataş" },
     { id: 2, name: "Test User" },
@@ -21,7 +20,7 @@ export default function UsersPage() {
       component: <BookDetail />,
       title: "Book Details",
     });
-    
+
     if (bookId) {
       dialogs.alert(`The book was sended to user with ID: ${bookId}`, {
         title: "Success",
@@ -44,26 +43,26 @@ export default function UsersPage() {
         >
           <Grid>#</Grid>
           <Grid>User Name</Grid>
-          <Grid>User Detail</Grid>
+          <Grid>Details</Grid>
         </Grid>
-        {users.map((book, index) => (
+        {users.map((user, index) => (
           <Grid
             container
-            key={book.id}
+            key={user.id}
             justifyContent="space-between"
             className="books-page-row"
           >
             <Grid textAlign="center">{index + 1}</Grid>
-            <Grid textAlign="left">{book.name}</Grid>
+            <Grid textAlign="left">{user.name}</Grid>
             <Grid textAlign="center">
               <Button
                 variant="contained"
                 color="primary"
                 onClick={() => {
-                  onBookDetailsClick(book.id);
+                  navigate(`/users/${user.id}`);
                 }}
               >
-                Details
+                Go to Profile 
               </Button>
             </Grid>
           </Grid>
