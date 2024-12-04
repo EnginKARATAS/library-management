@@ -9,6 +9,8 @@ import { Book } from "./entity/Book";
 AppDataSource.initialize()
   .then(async () => {
     const app = express();
+    const cors = require('cors');
+    app.use(cors());
     app.use(bodyParser.json());
 
     Routes.forEach((route) => {
