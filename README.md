@@ -11,6 +11,7 @@ A cute and modern library management system built with React, TypeScript, Expres
 - Book rating system
 - Modern and cute UI design
 - Responsive layout
+- Error handling wiht popup and snackbars
 
 ## Prerequisites
 
