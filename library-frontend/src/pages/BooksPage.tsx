@@ -23,6 +23,7 @@ export default function BooksPage() {
     const bookId = await dialogs.open(BasePopup, {
       component: <BookDetail bookId={id} />,
       title: "Book Details",
+      bookId: id,
     });
 
     if (bookId) {
