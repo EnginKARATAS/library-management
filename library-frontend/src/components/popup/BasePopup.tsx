@@ -39,21 +39,6 @@ export default function BasePopup({
     <Dialog fullWidth open={open} onClose={() => onClose(null)}>
       <DialogTitle>{payload.title}</DialogTitle>
       <DialogContent>{payload.component}</DialogContent>
-      <DialogActions>
-        <LoadingButton
-          loading={loading}
-          onClick={async () => {
-            setLoading(true);
-            try {
-              onClose("id");
-            } finally {
-              setLoading(false);
-            }
-          }}
-        >
-          Submit
-        </LoadingButton>
-      </DialogActions>
     </Dialog>
   );
 }
