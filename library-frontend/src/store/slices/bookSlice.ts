@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
+import { borrowBookToUser } from "./userSlice";
 
 type Book = {
   id: number;
@@ -42,7 +43,7 @@ export const fetchBookDetails = createAsyncThunk(
   "books/fetchBookDetails",
   async (bookId: number) => {
     if (!bookId && bookId !== 0) {
-      throw new Error('Book ID is required');
+      throw new Error("Book ID is required");
     }
     const response = await axios.get(`http://localhost:3000/books/${bookId}`);
     console.log(response.data);
@@ -56,6 +57,12 @@ const bookSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
+      .addCase(borrowBookToUser.fulfilled, (state, action) => {
+        const bookId = action.meta.arg.bookId;
+        if (state.books) {
+          state.books = state.books.filter(book => book.id !== bookId);
+        }
+      })
       .addCase(fetchBooks.pending, (state) => {
         state.loading = true;
         state.error = null;
