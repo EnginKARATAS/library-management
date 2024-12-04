@@ -10,12 +10,14 @@ import UsersPage from "./pages/UsersPage";
 import UserDetail from "./pages/UserDetail";
 import store from "./store";
 import { Provider } from 'react-redux';
+import Snackbar from './components/popup/Snackbar';
 
 function App() {
   return (
     <Provider store={store}>
       <DialogsProvider>
         <Header />
+        <Snackbar />
         <Routes>
           <Route path="/" element={<MainPage />} />
           <Route path="/books" element={<BooksPage />} />
