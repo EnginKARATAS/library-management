@@ -3,12 +3,12 @@ import { Grid2 as Grid } from "@mui/material";
 import "../styles/components/booksPage.scss";
 import { useParams } from "react-router-dom";
 import { useDialogs } from "@toolpad/core/useDialogs";
-import BasePopup from "../components/popup/BasePopup";
-import BookDetail from "../components/popup/BookDetail";
+import { BasePopup2 } from "../components/popup/BasePopup";
 import { useEffect } from "react";
-import { fetchUserDetails } from "../store/slices/userSlice";
+import { fetchUserDetails, returnBookFromUser } from "../store/slices/userSlice";
 import { AppDispatch, RootState } from "../store";
 import { useDispatch, useSelector } from "react-redux";
+
 export default function UserDetail() {
   const { id } = useParams<{ id: string }>();
   const dialogs = useDialogs();
@@ -18,23 +18,23 @@ export default function UserDetail() {
   useEffect(() => {
     if (id) {
       dispatch(fetchUserDetails(parseInt(id)));
-      console.log(userDetails)
-      
     }
   }, [id, dispatch]);
 
-  const onBookDetailsClick = async (id: number) => {
-    const bookId = await dialogs.open(BasePopup, {
-      component: <BookDetail bookId={id} />,
-      title: "Book Details",
-    });
-
-    if (bookId) {
-      dialogs.alert(`The book was sent to user with ID: ${bookId}`, {
-        title: "Success",
-      });
+  const onReturnBookClick = async (bookId: number) => {
+    if (id) {
+      await dispatch(returnBookFromUser({ bookId, userId: parseInt(id) }));
+      const result = await dialogs.open(BasePopup2);
+      if (result && parseInt(result) <= 5 && parseInt(result) >= 0) {
+        await dialogs.alert(
+          `Your have successfully returned, and rated the book with ${Number(
+            result
+          )}. You're always welcome to Rainbow Library`
+        );
+      }
     }
   };
+
   return (
     <Grid
       className="main-container"
@@ -43,71 +43,65 @@ export default function UserDetail() {
       alignItems="center"
     >
       <div className="operaions-container">
-        <h1>User Detail</h1>
+        <h1>{userDetails?.name} Profile</h1>
         <div className="present">
+          <h2>Current Books</h2>
           <Grid
             container
             className="books-page-row books-page-header"
             justifyContent="space-between"
           >
             <Grid>#</Grid>
-            <Grid>User Name</Grid>
-            <Grid>Details</Grid>
+            <Grid>Book Name</Grid>
+            <Grid>Actions</Grid>
           </Grid>
-          {userDetails?.books?.present.map((user, index) => (
+          {userDetails?.books?.present.map((presentBook, index) => (
             <Grid
               container
-              key={user.id}
+              key={`present-${presentBook.id}-${index}`}
               justifyContent="space-between"
               className="books-page-row"
             >
               <Grid textAlign="center">{index + 1}</Grid>
-              <Grid textAlign="left">{user.name}</Grid>
+              <Grid textAlign="left">{presentBook.name}</Grid>
               <Grid textAlign="center">
                 <Button
                   variant="contained"
-                  color="primary"
-                  onClick={() => {
-                    navigate(`/userDetails/${user.id}`);
-                  }}
+                  color="secondary"
+                  onClick={() => onReturnBookClick(presentBook.id)}
                 >
-                  Go to Profile
+                  Return
                 </Button>
               </Grid>
             </Grid>
           ))}
         </div>
         <div className="past">
+          <h2>Past Books</h2>
           <Grid
             container
             className="books-page-row books-page-header"
             justifyContent="space-between"
           >
             <Grid>#</Grid>
-            <Grid>User Name</Grid>
-            <Grid>User Score</Grid>
-            <Grid>Details</Grid>
+            <Grid>Book Name</Grid>
+            <Grid>Rating</Grid>
           </Grid>
-          {userDetails?.books?.present.map((user, index) => (
+          {userDetails?.books?.past.map((pastBook, index) => (
             <Grid
               container
-              key={user.id}
+              key={`past-${pastBook.id}-${index}`}
               justifyContent="space-between"
               className="books-page-row"
             >
               <Grid textAlign="center">{index + 1}</Grid>
-              <Grid textAlign="left">{user.name}</Grid>
-              <Grid textAlign="left">{user.score == -1 ? "Not Rated" : <Rating name="read-only" value={user.score} readOnly />}</Grid>
-              <Grid textAlign="center">
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={() => {
-                    navigate(`/userDetails/${user.id}`);
-                  }}
-                >
-                  Details
-                </Button>
+              <Grid textAlign="left">{pastBook.name}</Grid>
+              <Grid textAlign="left">
+                {pastBook.score === -1 ? (
+                  "Not Rated"
+                ) : (
+                  <Rating name="read-only" value={pastBook.score} readOnly />
+                )}
               </Grid>
             </Grid>
           ))}
