@@ -4,15 +4,15 @@ import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 export default function MainPage() {
   const navigate = useNavigate();
-  const onButtonClick = () => {
-    navigate("/books");
+  const onButtonClick = (route: string) => {
+    navigate(route);
   };
   
   return (
     <Grid
       container
       justifyContent="center"
-      className="main-page-container"
+      className="main-container"
     >
       <div className="first-section-container">
         <Grid container>
@@ -31,7 +31,7 @@ export default function MainPage() {
               alignItems="center"
               direction="column"
             >
-              <Button onClick={()=>onButtonClick()} variant="contained" style={{ backgroundColor: "#4a2e6f", color: "white" }}>Book Management</Button>
+              <Button onClick={()=>onButtonClick("books")} variant="contained" style={{ backgroundColor: "#4a2e6f", color: "white" }}>Book Management</Button>
             </Grid>
           </Grid>
           <Grid
