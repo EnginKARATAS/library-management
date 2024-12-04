@@ -83,7 +83,6 @@ button {
   font-weight: 600;
   cursor: pointer;
   transition: transform 0.2s, box-shadow 0.2s;
-  box-shadow: $shadow-soft;
 
   &:hover {
     transform: translateY(-2px);
