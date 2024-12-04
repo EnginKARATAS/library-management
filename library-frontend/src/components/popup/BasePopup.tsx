@@ -3,6 +3,11 @@ import {
   DialogTitle,
   DialogContent,
   DialogActions,
+  DialogContentText,
+  TextField,
+  Button,
+  Rating,
+  Typography,
 } from "@mui/material";
 import { DialogProps } from "@toolpad/core";
 import LoadingButton from "@mui/lab/LoadingButton";
@@ -48,6 +53,31 @@ export default function BasePopup({
         >
           Submit
         </LoadingButton>
+      </DialogActions>
+    </Dialog>
+  );
+}
+export function BasePopup2({
+  open,
+  onClose,
+}: DialogProps<undefined, string | null>) {
+  const [result, setResult] = React.useState(0);
+  return (
+    <Dialog fullWidth open={open} onClose={() => onClose(null)}>
+      <DialogTitle>Return Book</DialogTitle>
+      <DialogContent>
+        <DialogContentText>Please Share with us your rating</DialogContentText>
+        <Rating
+          name="read-only"
+          value={result}
+          size="large"
+          onChange={(event, newValue) => {
+            setResult(newValue || 0);
+          }}
+        />
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={() => onClose(result.toString())}>Ok</Button>
       </DialogActions>
     </Dialog>
   );
