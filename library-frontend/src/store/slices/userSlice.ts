@@ -1,36 +1,22 @@
-import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
-import axios from 'axios';
 
-type UserBook = {
-  id: number;
-  name: string;
-  books?: {
-    past: any[];
-    present: any[];
-  };
-}
+export const fetchUsers = createAsyncThunk("users/fetchUsers", async () => {
+  const response = await axios.get("http://localhost:3000/users");
+  return response.data;
+});
 
-type User = Omit<UserBook, 'books'>;
-
-interface UserState {
-  users: User[] | null;
-  currentUser: User | null;
-  loading: boolean;
-  error: string | null;
-}
-
-const initialState: UserState = {
-  users: [],
-  currentUser: null,
-  loading: false,
-  error: null,
-};
-
+export const fetchUserDetails = createAsyncThunk(
+  "users/fetchUserDetails",
+  async (userId: number) => {
+    const response = await axios.get(`http://localhost:3000/users/${userId}`);
+    return response.data;
+  }
+);
 
 const userSlice = createSlice({
-  name: 'user',
+  name: "user",
   initialState,
   reducers: {
+ 
   },
 });
 
