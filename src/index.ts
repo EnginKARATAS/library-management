@@ -60,7 +60,7 @@ AppDataSource.initialize()
       user: null,
       year: 2023,
       lendStatus: -1,
-      userScore: "-1",
+      score: "-1",
     });
 
     const book2 = AppDataSource.manager.create(Book, {
@@ -70,7 +70,7 @@ AppDataSource.initialize()
       user: null,
       year: 2023,
       lendStatus: -1,
-      userScore: "1",
+      score: "1",
     });
 
     const book3 = AppDataSource.manager.create(Book, {
@@ -80,7 +80,7 @@ AppDataSource.initialize()
       user: null,
       year: 2023,
       lendStatus: -1,
-      userScore: "2",
+      score: "2",
     });
 
     const book4 = AppDataSource.manager.create(Book, {
@@ -90,7 +90,7 @@ AppDataSource.initialize()
       user: null,
       year: 2023,
       lendStatus: -1,
-      userScore: "3",
+      score: "3",
     });
 
     const book5 = AppDataSource.manager.create(Book, {
@@ -100,7 +100,7 @@ AppDataSource.initialize()
       user: null,
       year: 2023,
       lendStatus: -1,
-      userScore: "4",
+      score: "4",
     });
 
     const book6 = AppDataSource.manager.create(Book, {
@@ -110,7 +110,7 @@ AppDataSource.initialize()
       user: null,
       year: 2023,
       lendStatus: -1,
-      userScore: "5",
+      score: "5",
     });
 
     await AppDataSource.manager.save([
