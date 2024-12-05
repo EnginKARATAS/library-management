@@ -1,4 +1,4 @@
-import { Button } from "@mui/material";
+import { Button, Rating } from "@mui/material";
 import { Grid2 as Grid } from "@mui/material";
 import "../styles/components/booksPage.scss";
 //import { useNavigate } from "react-router-dom";
@@ -9,6 +9,7 @@ import { AppDispatch, RootState } from "../store";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { fetchBooks } from "../store/slices/bookSlice";
+import HourglassEmptyIcon from '@mui/icons-material/HourglassEmpty';
 export default function BooksPage() {
   //const navigate = useNavigate();
   const books = useSelector((state: RootState) => state.book.books);
@@ -33,11 +34,7 @@ export default function BooksPage() {
     }
   };
   return (
-    <Grid
-      className="main-container"
-      container
-      justifyContent="center"
-    >
+    <Grid className="main-container" container justifyContent="center">
       <div className="operaions-container">
         <h1>Book List</h1>
         <Grid
@@ -65,7 +62,7 @@ export default function BooksPage() {
             <Grid>{book.author}</Grid>
             <Grid>{book.publisher}</Grid>
             <Grid>{book.year}</Grid>
-            <Grid>{book.score}</Grid>
+            <Grid>{Number(book.score) !== -1 ? <Rating value={Number(book.score)} readOnly /> : <HourglassEmptyIcon style={{ margin: '0 35px' }} />}</Grid>
             <Grid>
               <Button
                 variant="contained"

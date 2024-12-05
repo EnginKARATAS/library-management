@@ -1,4 +1,4 @@
-import { Stack, Typography } from "@mui/material";
+import { Rating, Stack, Typography } from "@mui/material";
 
 import { TextField } from "@mui/material";
 
@@ -115,16 +115,7 @@ export default function BookDetail({ bookId }: { bookId: number }) {
           <span>
             <b>Score</b>
           </span>
-          <TextField
-            required
-            id="outlined-required-score"
-            value={bookDetails?.score.toString()}
-            slotProps={{
-              input: {
-                readOnly: true,
-              },
-            }}
-          />
+          <Rating value={Number(bookDetails?.score)} readOnly />
         </>
       )}
 

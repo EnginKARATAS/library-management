@@ -68,7 +68,7 @@ export default function UserDetail() {
       <div className="operaions-container">
         <h1>{userDetails?.name} Profile</h1>
         <div className="present">
-          <h2>Current Books</h2>
+          <h2>User is currently reading</h2>
           <Grid
             container
             className="books-page-row books-page-header"
@@ -100,7 +100,7 @@ export default function UserDetail() {
           ))}
         </div>
         <div className="past">
-          <h2>Past Books</h2>
+          <h2>User has read & returned</h2>
           <Grid
             container
             className="books-page-row books-page-header"
