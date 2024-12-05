@@ -77,7 +77,7 @@ DB_NAME=library_db
 
 ## Running the Application
 
-0. Database Setup Steps:
+#  Choose One:
 
 ### Auto Database Creation
 
@@ -98,6 +98,8 @@ DB_NAME=library_db
 * Choose the `library_db_backup.sql` file and click "Restore".
 
 * Start the backend server:
+
+# After Db Setup
 
 ```bash
 # From the root directory
