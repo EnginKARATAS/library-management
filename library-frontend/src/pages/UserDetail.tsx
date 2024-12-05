@@ -8,6 +8,7 @@ import { useEffect } from "react";
 import {
   fetchUserDetails,
   returnBookFromUser,
+  showSnackbar,
 } from "../store/slices/userSlice";
 import { AppDispatch, RootState } from "../store";
 import { useDispatch, useSelector } from "react-redux";
@@ -35,22 +36,35 @@ export default function UserDetail() {
             userId: parseInt(id),
             score: parseInt(result || "0"),
           })
-        );
-        await dialogs.alert(
-          `Your have successfully returned, and rated the book with ${Number(
-            result
-          )}. You're always welcome to Rainbow Library`
-        );
+        )
+          .unwrap()
+          .then(() => {
+            dispatch(
+              showSnackbar({
+                message: "Book returned successfully",
+                severity: "success",
+              })
+            );
+            dialogs.alert(
+              `Your have successfully returned, and rated with ${Number(
+                result
+              )}. You're always welcome to Rainbow Library`
+            );
+          })
+          .catch((e) => {
+            dispatch(
+              showSnackbar({
+                message: "Book returning failed: " + e.message,
+                severity: "error",
+              })
+            );
+          });
       }
     }
   };
 
   return (
-    <Grid
-      className="main-container"
-      container
-      justifyContent="center"
-    >
+    <Grid className="main-container" container justifyContent="center">
       <div className="operaions-container">
         <h1>{userDetails?.name} Profile</h1>
         <div className="present">

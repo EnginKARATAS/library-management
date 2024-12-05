@@ -32,15 +32,28 @@ export default function BookDetail({ bookId }: { bookId: number }) {
     if (selectedUser) {
       setUsername(selectedUser.name);
       setSelectedUserId(userId);
-      dispatch(borrowBookToUser({ bookId, userId })).then((result) => {
-        dispatch(
-          showSnackbar({
-            message:
-              "Book borrowed successfully, new possesser: " + selectedUser.name,
-            severity: "success",
-          })
-        );
-      });
+      dispatch(borrowBookToUser({ bookId, userId }))
+        .unwrap()
+        .then((data) => {
+          if (data.status === 204) {
+            dispatch(
+              showSnackbar({
+                message:
+                  "Book borrowed successfully, new possesser: " +
+                  selectedUser.name,
+                severity: "success",
+              })
+            );
+          }
+        })
+        .catch((err) => {
+          dispatch(
+            showSnackbar({
+              message: "Book already borrowed: " + err.message,
+              severity: "error",
+            })
+          );
+        });
     }
   };
   return (
