@@ -9,7 +9,7 @@ import { AppDispatch, RootState } from "../store";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { fetchBooks } from "../store/slices/bookSlice";
-import HourglassEmptyIcon from '@mui/icons-material/HourglassEmpty';
+import HourglassEmptyIcon from "@mui/icons-material/HourglassEmpty";
 export default function BooksPage() {
   //const navigate = useNavigate();
   const books = useSelector((state: RootState) => state.book.books);
@@ -58,11 +58,31 @@ export default function BooksPage() {
             className="books-page-row"
           >
             <Grid>{index + 1}</Grid>
-            <Grid>{book.name}</Grid>
-            <Grid>{book.author}</Grid>
-            <Grid>{book.publisher}</Grid>
+            <Grid>
+              {book.name.length > 15
+                ? `${book.name.substring(0, 15)}...`
+                : book.name}
+            </Grid>
+            <Grid>
+              <Grid>
+                {book.author && book.author.length > 10
+                  ? `${book.author?.substring(0, 10)}...`
+                  : book.author}
+              </Grid>
+            </Grid>
+            <Grid>
+              {book.publisher && book.publisher.length > 10
+                ? `${book.publisher?.substring(0, 10)}...`
+                : book.publisher}
+            </Grid>
             <Grid>{book.year}</Grid>
-            <Grid>{Number(book.score) !== -1 ? <Rating value={Number(book.score)} readOnly /> : <HourglassEmptyIcon style={{ margin: '0 35px' }} />}</Grid>
+            <Grid>
+              {Number(book.score) !== -1 ? (
+                <Rating value={Number(book.score)} readOnly />
+              ) : (
+                <HourglassEmptyIcon style={{ margin: "0 45px" }} />
+              )}
+            </Grid>
             <Grid>
               <Button
                 variant="contained"
