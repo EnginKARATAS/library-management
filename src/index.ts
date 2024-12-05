@@ -39,7 +39,7 @@ AppDataSource.initialize()
 
     await AppDataSource.manager.save(
       AppDataSource.manager.create(User, {
-        name: "John Doe",
+        name: "Engin Karataş",
       })
     );
     await AppDataSource.manager.save(
@@ -67,7 +67,7 @@ AppDataSource.initialize()
       author: "Stephen King",
       name: "The Shining",
       publisher: "Doubleday",
-      user: null,
+      user: {id: 1},
       year: 1977,
       lendStatus: -1,
       score: "-1",
@@ -77,9 +77,9 @@ AppDataSource.initialize()
       author: "J.K. Rowling",
       name: "Harry Potter and the Philosopher's Stone",
       publisher: "Bloomsbury",
-      user: null,
+      user: {id: 1},
       year: 1997,
-      lendStatus: -1,
+      lendStatus: 0,
       score: "1",
     });
 
@@ -87,9 +87,9 @@ AppDataSource.initialize()
       author: "George Orwell",
       name: "Nineteen Eighty-Four",
       publisher: "Secker & Warburg",
-      user: null,
       year: 1949,
-      lendStatus: -1,
+      user: {id: 2},
+      lendStatus: 0,
       score: "2",
     });
 
@@ -97,9 +97,9 @@ AppDataSource.initialize()
       author: "Harper Lee",
       name: "To Kill a Mockingbird",
       publisher: "J.B. Lippincott & Co.",
-      user: null,
       year: 1960,
-      lendStatus: -1,
+      user: {id: 2},
+      lendStatus: 0,
       score: "3",
     });
 
