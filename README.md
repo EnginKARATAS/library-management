@@ -3,7 +3,7 @@
 A cute and modern library management system built with React, TypeScript, Express, and TypeORM.
 ![image](https://github.com/user-attachments/assets/83d92e4c-4045-404d-a10e-45af3e66b2c0)
 
-go to api design[page](https://miro.com/welcomeonboard/NjFraUc4UXY0V2lDd252Z0FjU2FCNzQzOSsySjd6RnR0eVV6bUY2dGNzT0xGb3R4VXZQaXAwSEp5RW9wR3V3OUJ1SFJ2aUxzTFN0R0RjUFg5SFBaV1FVcDNFaUg5SnFXY0RyRm0wOE9IMWR6dHFoWjRzb3d5MkN3TjZIV1ZybWMhZQ==?share_link_id=646538550223) 
+go to api design [page](https://miro.com/welcomeonboard/NjFraUc4UXY0V2lDd252Z0FjU2FCNzQzOSsySjd6RnR0eVV6bUY2dGNzT0xGb3R4VXZQaXAwSEp5RW9wR3V3OUJ1SFJ2aUxzTFN0R0RjUFg5SFBaV1FVcDNFaUg5SnFXY0RyRm0wOE9IMWR6dHFoWjRzb3d5MkN3TjZIV1ZybWMhZQ==?share_link_id=646538550223) 
 
 ![image](https://github.com/user-attachments/assets/5535454f-2496-42fc-a74d-47d69f2811ce)
 
