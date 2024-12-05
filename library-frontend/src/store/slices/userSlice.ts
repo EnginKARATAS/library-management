@@ -161,14 +161,16 @@ const userSlice = createSlice({
       .addCase(returnBookFromUser.fulfilled, (state, action) => {
         if (state.currentUser?.books) {
           const bookId = action.meta.arg.bookId;
+          const score = action.meta.arg.score;
 
           const bookIndex = state.currentUser.books.present.findIndex(
             (book) => book.id == bookId
           );
           if (bookIndex !== -1) {
-            state.currentUser.books.past.push(
-              state.currentUser.books.present[bookIndex]
-            );
+            state.currentUser.books.past.push({
+              ...state.currentUser.books.present[bookIndex],
+              score: score,
+            });
             state.currentUser.books.present.splice(bookIndex, 1);
           }
         }
