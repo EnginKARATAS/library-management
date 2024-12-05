@@ -37,7 +37,6 @@ export default function BooksPage() {
       className="main-container"
       container
       justifyContent="center"
-      alignItems="center"
     >
       <div className="operaions-container">
         <h1>Book List</h1>
@@ -48,6 +47,10 @@ export default function BooksPage() {
         >
           <Grid>#</Grid>
           <Grid>Book Name</Grid>
+          <Grid>Author</Grid>
+          <Grid>Publisher</Grid>
+          <Grid>Year</Grid>
+          <Grid>Score</Grid>
           <Grid>Book Detail</Grid>
         </Grid>
         {books?.map((book, index) => (
@@ -57,9 +60,13 @@ export default function BooksPage() {
             justifyContent="space-between"
             className="books-page-row"
           >
-            <Grid textAlign="center">{index + 1}</Grid>
-            <Grid textAlign="left">{book.name}</Grid>
-            <Grid textAlign="center">
+            <Grid>{index + 1}</Grid>
+            <Grid>{book.name}</Grid>
+            <Grid>{book.author}</Grid>
+            <Grid>{book.publisher}</Grid>
+            <Grid>{book.year}</Grid>
+            <Grid>{book.score}</Grid>
+            <Grid>
               <Button
                 variant="contained"
                 color="primary"

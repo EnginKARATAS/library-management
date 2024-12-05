@@ -7,7 +7,7 @@ export class BookController {
 
   async getAllBooks(request: Request, response: Response, next: NextFunction) {
     return this.bookRepository.find({
-      select: { id: true, name: true },
+      select: { id: true, name: true, author: true, publisher: true, year: true, score: true },
       where: { lendStatus: -1 },
     });
   }
@@ -32,6 +32,9 @@ export class BookController {
     const bookResponseModel = {
       id: book.id,
       name: book.name,
+      author: book.author,
+      publisher: book.publisher,
+      year: book.year,
       score: book.score === "-1" ? Number(book.score) : book.score,
     };
     return bookResponseModel;

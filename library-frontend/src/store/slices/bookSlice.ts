@@ -6,6 +6,9 @@ type Book = {
   id: number;
   name: string;
   score: string;
+  author?: string;
+  publisher?: string;
+  year?: string;
 };
 
 type OneBook = Omit<Book, "score"> & {
@@ -13,8 +16,8 @@ type OneBook = Omit<Book, "score"> & {
   name: string;
   score?: number;
   author?: string;
-  year?: string;
   publisher?: string;
+  year?: string;
 };
 
 interface BookState {
@@ -35,6 +38,7 @@ export const fetchBooks = createAsyncThunk<Book[]>(
   "books/fetchBooks",
   async () => {
     const response = await axios.get("http://localhost:3000/books");
+    console.log(response.data);
     return response.data;
   }
 );
@@ -46,7 +50,6 @@ export const fetchBookDetails = createAsyncThunk(
       throw new Error("Book ID is required");
     }
     const response = await axios.get(`http://localhost:3000/books/${bookId}`);
-    console.log(response.data);
     return response.data;
   }
 );

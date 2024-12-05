@@ -47,7 +47,7 @@ export default function BookDetail({ bookId }: { bookId: number }) {
   return (
     <Stack spacing={2} padding={1}>
       <TextField
-        placeholder={bookDetails?.name}
+        label="Name"
         slotProps={{
           input: {
             readOnly: true,
@@ -57,8 +57,8 @@ export default function BookDetail({ bookId }: { bookId: number }) {
         value={bookDetails?.name}
       />
       <TextField
-        placeholder="Author"
-        slotProps={{
+        label="Author"
+         slotProps={{
           input: {
             readOnly: true,
           },
@@ -67,7 +67,7 @@ export default function BookDetail({ bookId }: { bookId: number }) {
         value={bookDetails?.author}
       />
       <TextField
-        placeholder="Book Year"
+        label="Year"
         slotProps={{
           input: {
             readOnly: true,
@@ -77,7 +77,7 @@ export default function BookDetail({ bookId }: { bookId: number }) {
         value={bookDetails?.year}
       />
       <TextField
-        placeholder="Publisher"
+        label="Publisher"
         slotProps={{
           input: {
             readOnly: true,
@@ -88,6 +88,7 @@ export default function BookDetail({ bookId }: { bookId: number }) {
       />
       {bookDetails?.score && bookDetails?.score >= 0 && (
         <TextField
+          label="Avarage Score"
           placeholder={bookDetails?.score.toString()}
           slotProps={{
             input: {

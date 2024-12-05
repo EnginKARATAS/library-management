@@ -43,7 +43,6 @@ export default function UsersPage() {
       className="main-container"
       container
       justifyContent="center"
-      alignItems="center"
     >
       <div className="operaions-container">
         <h1>Users List</h1>

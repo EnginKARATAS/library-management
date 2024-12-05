@@ -50,7 +50,6 @@ export default function UserDetail() {
       className="main-container"
       container
       justifyContent="center"
-      alignItems="center"
     >
       <div className="operaions-container">
         <h1>{userDetails?.name} Profile</h1>
