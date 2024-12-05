@@ -6,7 +6,7 @@ import { MenuItem } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../store";
 import { useEffect, useState } from "react";
-import { borrowBookToUser, fetchUsers } from "../../store/slices/userSlice";
+import { borrowBookToUser, fetchUserDetails, fetchUsers } from "../../store/slices/userSlice";
 import { fetchBookDetails } from "../../store/slices/bookSlice";
 import { showSnackbar } from "../../store/slices/userSlice";
 
@@ -16,12 +16,18 @@ export default function BookDetail({ bookId }: { bookId: number }) {
   const dispatch = useDispatch<AppDispatch>();
   const [selectedUserId, setSelectedUserId] = useState(0);
   const [username, setUsername] = useState("");
+  const [bookBelongingUserId, setBookBelongingUserId] = useState<number | ''>('');
+
   useEffect(() => {
     dispatch(fetchUsers());
+    
+    dispatch(fetchUserDetails(bookId)).unwrap().then((data) => {
+      console.log(data.id)
+        setBookBelongingUserId(data.id);
+    });
   }, [dispatch]);
 
   useEffect(() => {
-    console.log("Current bookId:", bookId);
     if (bookId >= 0) {
       dispatch(fetchBookDetails(bookId));
     }
@@ -64,7 +70,7 @@ export default function BookDetail({ bookId }: { bookId: number }) {
       <TextField
         required
         id="outlined-required-name"
-        value={bookDetails?.name}
+        value={bookDetails?.name || ''}
         slotProps={{
           input: {
             readOnly: true,
@@ -77,7 +83,7 @@ export default function BookDetail({ bookId }: { bookId: number }) {
       <TextField
         required
         id="outlined-required-author"
-        value={bookDetails?.author}
+        value={bookDetails?.author || ''}
         slotProps={{
           input: {
             readOnly: true,
@@ -90,7 +96,7 @@ export default function BookDetail({ bookId }: { bookId: number }) {
       <TextField
         required
         id="outlined-required-year"
-        value={bookDetails?.year}
+        value={bookDetails?.year || ''}
         slotProps={{
           input: {
             readOnly: true,
@@ -103,7 +109,7 @@ export default function BookDetail({ bookId }: { bookId: number }) {
       <TextField
         required
         id="outlined-required-publisher"
-        value={bookDetails?.publisher}
+        value={bookDetails?.publisher || ''}
         slotProps={{
           input: {
             readOnly: true,
@@ -122,19 +128,18 @@ export default function BookDetail({ bookId }: { bookId: number }) {
       <TextField
         variant="standard"
         select
-        defaultValue={0}
-        label="Assign this book to a user"
+        value={bookBelongingUserId || ''}
+        label="Current Possessor"
         onChange={(event) => {
           assignBookToUser(parseInt(event.target.value));
+          setBookBelongingUserId(parseInt(event.target.value));
         }}
       >
         {users?.map((user) => {
           return (
             <MenuItem
               key={user.id}
-              onClick={() => {
-                setUsername(user.name);
-              }}
+ 
               value={user.id}
             >
               {user.name}
