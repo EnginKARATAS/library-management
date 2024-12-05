@@ -1,4 +1,4 @@
-import { Stack } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
 
 import { TextField } from "@mui/material";
 
@@ -15,7 +15,7 @@ export default function BookDetail({ bookId }: { bookId: number }) {
   const users = useSelector((state: RootState) => state.user.users);
   const dispatch = useDispatch<AppDispatch>();
   const [selectedUserId, setSelectedUserId] = useState(0);
-  const [username,setUsername] = useState("");
+  const [username, setUsername] = useState("");
   useEffect(() => {
     dispatch(fetchUsers());
   }, [dispatch]);
@@ -27,17 +27,16 @@ export default function BookDetail({ bookId }: { bookId: number }) {
     }
   }, [dispatch, bookId]);
 
- 
-
   const assignBookToUser = (userId: number) => {
-    const selectedUser = users?.find(user => user.id === userId);
+    const selectedUser = users?.find((user) => user.id === userId);
     if (selectedUser) {
       setUsername(selectedUser.name);
       setSelectedUserId(userId);
       dispatch(borrowBookToUser({ bookId, userId })).then((result) => {
         dispatch(
           showSnackbar({
-            message: "Book borrowed successfully, new possesser: " + selectedUser.name,
+            message:
+              "Book borrowed successfully, new possesser: " + selectedUser.name,
             severity: "success",
           })
         );
@@ -46,61 +45,78 @@ export default function BookDetail({ bookId }: { bookId: number }) {
   };
   return (
     <Stack spacing={2} padding={1}>
+      <span>
+        <b>Book Name</b>
+      </span>
       <TextField
-        label="Name"
-        slotProps={{
-          input: {
-            readOnly: true,
-          },
-        }}
-        id="filled-disabled"
+        required
+        id="outlined-required-name"
         value={bookDetails?.name}
-      />
-      <TextField
-        label="Author"
-         slotProps={{
+        slotProps={{
           input: {
             readOnly: true,
           },
         }}
-        id="filled-disabled2"
+      />
+      <span>
+        <b>Author</b>
+      </span>
+      <TextField
+        required
+        id="outlined-required-author"
         value={bookDetails?.author}
-      />
-      <TextField
-        label="Year"
         slotProps={{
           input: {
             readOnly: true,
           },
         }}
-        id="filled-disabled3"
+      />
+      <span>
+        <b>Year</b>
+      </span>
+      <TextField
+        required
+        id="outlined-required-year"
         value={bookDetails?.year}
-      />
-      <TextField
-        label="Publisher"
         slotProps={{
           input: {
             readOnly: true,
           },
         }}
-        id="filled-disabled4"
+      />
+      <span>
+        <b>Publisher</b>
+      </span>
+      <TextField
+        required
+        id="outlined-required-publisher"
         value={bookDetails?.publisher}
+        slotProps={{
+          input: {
+            readOnly: true,
+          },
+        }}
       />
       {bookDetails?.score && bookDetails?.score >= 0 && (
-        <TextField
-          label="Avarage Score"
-          placeholder={bookDetails?.score.toString()}
-          slotProps={{
-            input: {
-              readOnly: true,
-            },
-          }}
-          id="filled-disabled5"
-          value={bookDetails?.score}
-        />
+        <>
+          <span>
+            <b>Score</b>
+          </span>
+          <TextField
+            required
+            id="outlined-required-score"
+            value={bookDetails?.score.toString()}
+            slotProps={{
+              input: {
+                readOnly: true,
+              },
+            }}
+          />
+        </>
       )}
 
       <TextField
+        variant="standard"
         select
         defaultValue={0}
         label="Assign this book to a user"
@@ -110,7 +126,13 @@ export default function BookDetail({ bookId }: { bookId: number }) {
       >
         {users?.map((user) => {
           return (
-            <MenuItem key={user.id} onClick={() => {setUsername(user.name)}} value={user.id}>
+            <MenuItem
+              key={user.id}
+              onClick={() => {
+                setUsername(user.name);
+              }}
+              value={user.id}
+            >
               {user.name}
             </MenuItem>
           );
