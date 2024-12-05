@@ -50,10 +50,10 @@ cd library-management
 2. Install dependencies for both frontend and backend:
 
 ```bash
-# Install backend dependencies
+# Install backend
 npm install
 
-# Install frontend dependencies
+# Install frontend
 cd library-frontend
 npm install
 ```
@@ -77,14 +77,27 @@ DB_NAME=library_db
 
 ## Running the Application
 
-0. Database Setup Steps
-**Auto Database Creation**
-After installing all dependencies at the root of the app (using `npm i`), create a table named `library_db` in the PostgreSQL pgAdmin4 application. Then, run `npm start` at the root of the application.
+0. Database Setup Steps:
 
-**Manual Database Creation**
-Download the `library_db_backup.sql` file to the root directory. In the PostgreSQL pgAdmin4 application, create a database named `library_db`. Remove the `library_db>Schemas>public` schema. Right-click on the `library_db` database and select "Restore". Choose the `library_db_backup.sql` file and click "Restore".
+### Auto Database Creation
 
-1. Start the backend server:
+* After installing all dependencies at the root of the app (using `npm i`), create a postgres db named `library_db` in the PostgreSQL pgAdmin4 application.
+
+* Then, run `npm start` at the root of the application.
+
+### Manual Database Creation
+
+* Download the `library_db_backup.sql` file in the root of the directory.
+
+* In the PostgreSQL pgAdmin4 application, create a database named `library_db`. 
+
+* Remove the `library_db>Schemas>public` schema.
+
+* Right-click on the `library_db` database and select "Restore". 
+
+* Choose the `library_db_backup.sql` file and click "Restore".
+
+* Start the backend server:
 
 ```bash
 # From the root directory
