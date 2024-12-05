@@ -104,26 +104,20 @@ The application will be available at:
 - Backend API: http://localhost:3000
 
 ## API Endpoints
-**Library DB Relation SQL Design**
+**Library DB API Design**
 
 **GET API Endpoints**
 
-* **Get Users (/users)**: Returns an array of users (`Array<Users>`). Selects the User Table.
-* **Get User (/users)**: Returns a user object with their borrowed book list, including id and names.
-* **Get User with Borrow History (/users/:id)**: Returns a user object along with their borrowed book list and borrowing history (`<User, UserBook>`). Lists the UserBook table. If `lendStatus` equals 2, selects all records with a score.
-* **Get Books (/books)**: Returns an array of books without user scores (`<Book[]>`). Selects the books table without user scores.
-* **Get Book (/books/:id)**: Returns a book object with user scores (`<Book>`). Selects the book table with user scores.
+* **Get Users (/users)**
+* **Get User (/users)**
+* **Get User with Borrow History (/users/:id)**table. If `lendStatus` equals 2, selects all records with a score.
+* **Get Books (/books)**
+* **Get Book (/books/:id)**
 
 **POST API Endpoints**
 
-* **Borrow Book (/users/:id/borrow/:id)**: Inserts a record into the UserBook table and into the Lend table with `lendStatus` set to 1.
-* **Return Book (/users/:id/return/:id)**: Updates the UserBook table status to 2, updates the user book, sets the `currentOwnerId` in the book table to null, inserts a rating point for the removed user, and updates the original table userScore. Inserts into the Lend table with `lendStatus` set to 1.
-
-**Additional Functionality**
-
-* **Insert Book**: Inserts a new book into the database.
-* **List Users**: Lists all users in the database.
-* **User Details (Lend Details)**: Provides detailed information about a user, including their lending history.
+* **Borrow Book (/users/:id/borrow/:id)**
+* **Return Book (/users/:id/return/:id)**point for the removed user, and updates the original table userScore. Inserts into the Lend table with `lendStatus` set to 1.
 
 **API Response Codes**
 
