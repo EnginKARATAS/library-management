@@ -39,78 +39,128 @@ AppDataSource.initialize()
 
     await AppDataSource.manager.save(
       AppDataSource.manager.create(User, {
-        name: "Test User",
+        name: "John Doe",
       })
     );
     await AppDataSource.manager.save(
       AppDataSource.manager.create(User, {
-        name: "Test User2",
+        name: "Jane Doe",
       })
     );
     await AppDataSource.manager.save(
       AppDataSource.manager.create(User, {
-        name: "Test User3",
+        name: "Alice Johnson",
+      })
+    );
+    await AppDataSource.manager.save(
+      AppDataSource.manager.create(User, {
+        name: "Bob Smith",
+      })
+    );
+    await AppDataSource.manager.save(
+      AppDataSource.manager.create(User, {
+        name: "Eve Brown",
       })
     );
 
     const book1 = AppDataSource.manager.create(Book, {
-      author: "Test Author",
-      name: "Test Book",
-      publisher: "Test Publisher",
+      author: "Stephen King",
+      name: "The Shining",
+      publisher: "Doubleday",
       user: null,
-      year: 2023,
+      year: 1977,
       lendStatus: -1,
       score: "-1",
     });
 
     const book2 = AppDataSource.manager.create(Book, {
-      author: "Test Author2",
-      name: "Test Book2",
-      publisher: "Test Publisher2",
+      author: "J.K. Rowling",
+      name: "Harry Potter and the Philosopher's Stone",
+      publisher: "Bloomsbury",
       user: null,
-      year: 2023,
+      year: 1997,
       lendStatus: -1,
       score: "1",
     });
 
     const book3 = AppDataSource.manager.create(Book, {
-      author: "Test Author3",
-      name: "Test Book3",
-      publisher: "Test Publisher3",
+      author: "George Orwell",
+      name: "Nineteen Eighty-Four",
+      publisher: "Secker & Warburg",
       user: null,
-      year: 2023,
+      year: 1949,
       lendStatus: -1,
       score: "2",
     });
 
     const book4 = AppDataSource.manager.create(Book, {
-      author: "Test Author4",
-      name: "Test Book4",
-      publisher: "Test Publisher4",
-      user: { id: 1 },
-      year: 2023,
-      lendStatus: 0,
+      author: "Harper Lee",
+      name: "To Kill a Mockingbird",
+      publisher: "J.B. Lippincott & Co.",
+      user: null,
+      year: 1960,
+      lendStatus: -1,
       score: "3",
     });
 
     const book5 = AppDataSource.manager.create(Book, {
-      author: "Test Author5",
-      name: "Test Book5",
-      publisher: "Test Publisher5",
-      user: { id: 1 },
-      year: 2023,
-      lendStatus: 0,
-      score: "4",
+      author: "J.R.R. Tolkien",
+      name: "The Lord of the Rings",
+      publisher: "Allen & Unwin",
+      user: null,
+      year: 1954,
+      lendStatus: -1,
+      score: "-1",
     });
 
     const book6 = AppDataSource.manager.create(Book, {
-      author: "Test Author6",
-      name: "Test Book6",
-      publisher: "Test Publisher6",
-      user: { id: 1 },
-      year: 2023,
-      lendStatus: 0,
+      author: "Agatha Christie",
+      name: "And Then There Were None",
+      publisher: "Collins Crime Club",
+      user: null,
+      year: 1939,
+      lendStatus: -1,
       score: "5",
+    });
+
+    const book7 = AppDataSource.manager.create(Book, {
+      author: "Leo Tolstoy",
+      name: "War and Peace",
+      publisher: "The Russian Messenger",
+      user: null,
+      year: 1869,
+      lendStatus: -1,
+      score: "6",
+    });
+
+    const book8 = AppDataSource.manager.create(Book, {
+      author: "F. Scott Fitzgerald",
+      name: "The Great Gatsby",
+      publisher: "Charles Scribner's Sons",
+      user: null,
+      year: 1925,
+      lendStatus: -1,
+      score: "7",
+    });
+
+    const book9 = AppDataSource.manager.create(Book, {
+      author: "Gabriel Garcia Marquez",
+      name: "One Hundred Years of Solitude",
+      publisher: "Editorial Sudamericana",
+      user: null,
+      year: 1967,
+      lendStatus: -1,
+      score: "8",
+    });
+
+    const book10 = AppDataSource.manager.create(Book, {
+      author: "Mark Twain",
+      name: "Adventures of Huckleberry Finn",
+      publisher: "Chatto & Windus",
+      user: null,
+      year: 1884,
+      lendStatus: -1,
+      score: "9",
     });
 
     await AppDataSource.manager.save([
@@ -120,6 +170,10 @@ AppDataSource.initialize()
       book4,
       book5,
       book6,
+      book7,
+      book8,
+      book9,
+      book10,
     ]);
 
     console.log(
