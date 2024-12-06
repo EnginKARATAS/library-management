@@ -1,4 +1,4 @@
-# Rainbow Library Management System
+# Rainbow Library - Book Management System
 
 A cute and modern library management system built with React, TypeScript, Express, and TypeORM.
 ![image](https://github.com/user-attachments/assets/83d92e4c-4045-404d-a10e-45af3e66b2c0)
